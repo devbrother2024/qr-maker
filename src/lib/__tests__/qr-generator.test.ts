@@ -19,8 +19,6 @@ class MockImage {
 global.Image = MockImage as unknown as typeof Image
 
 describe('qr-generator', () => {
-  let getContextSpy: ReturnType<typeof vi.spyOn>
-  let toDataURLSpy: ReturnType<typeof vi.spyOn>
   const mockContext = {
     drawImage: vi.fn(),
     fillStyle: '',
@@ -33,12 +31,12 @@ describe('qr-generator', () => {
   } as Partial<CanvasRenderingContext2D>
 
   beforeEach(() => {
-    getContextSpy = vi
-      .spyOn(HTMLCanvasElement.prototype, 'getContext')
-      .mockReturnValue(mockContext as CanvasRenderingContext2D)
-    toDataURLSpy = vi
-      .spyOn(HTMLCanvasElement.prototype, 'toDataURL')
-      .mockReturnValue('data:image/png;base64,mockdata')
+    vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(
+      mockContext as CanvasRenderingContext2D,
+    )
+    vi.spyOn(HTMLCanvasElement.prototype, 'toDataURL').mockReturnValue(
+      'data:image/png;base64,mockdata' as string,
+    )
   })
 
   afterEach(() => {

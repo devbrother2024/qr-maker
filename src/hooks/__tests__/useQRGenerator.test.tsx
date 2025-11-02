@@ -1,20 +1,22 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { renderHook, waitFor } from '@testing-library/react'
 import { useQRGenerator } from '../useQRGenerator'
-import QRCode from 'qrcode'
 
 // qrcode 모듈 모킹
+const mockToDataURL = vi.fn()
+const mockToString = vi.fn()
+
 vi.mock('qrcode', () => ({
   default: {
-    toDataURL: vi.fn(),
-    toString: vi.fn(),
+    toDataURL: mockToDataURL,
+    toString: mockToString,
   },
 }))
 
 // qr-generator 모듈 모킹
 vi.mock('@/lib/qr-generator', () => ({
-  mergeLogoWithQR: vi.fn((qr, logo) => Promise.resolve('merged-png')),
-  mergeLogoWithSVG: vi.fn((svg, logo) => 'merged-svg'),
+  mergeLogoWithQR: vi.fn(() => Promise.resolve('merged-png')),
+  mergeLogoWithSVG: vi.fn(() => 'merged-svg'),
 }))
 
 describe('useQRGenerator', () => {
@@ -61,8 +63,7 @@ describe('useQRGenerator', () => {
 
     it('http://로 시작하는 URL은 정상 처리되어야 함', async () => {
       const mockDataUrl = 'data:image/png;base64,mockdata'
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toDataURL).mockResolvedValue(mockDataUrl)
+      mockToDataURL.mockResolvedValue(mockDataUrl)
 
       const { result } = renderHook(() => useQRGenerator())
 
@@ -73,7 +74,7 @@ describe('useQRGenerator', () => {
         expect(result.current.error).toBeNull()
       })
 
-      expect(QRCode.toDataURL).toHaveBeenCalledWith(
+      expect(mockToDataURL).toHaveBeenCalledWith(
         'http://example.com',
         expect.objectContaining({
           width: 300,
@@ -87,8 +88,7 @@ describe('useQRGenerator', () => {
 
     it('https://로 시작하는 URL은 정상 처리되어야 함', async () => {
       const mockDataUrl = 'data:image/png;base64,mockdata'
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toDataURL).mockResolvedValue(mockDataUrl)
+      mockToDataURL.mockResolvedValue(mockDataUrl)
 
       const { result } = renderHook(() => useQRGenerator())
 
@@ -102,8 +102,7 @@ describe('useQRGenerator', () => {
 
     it('프로토콜이 없는 URL은 자동으로 https://를 추가해야 함', async () => {
       const mockDataUrl = 'data:image/png;base64,mockdata'
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toDataURL).mockResolvedValue(mockDataUrl)
+      mockToDataURL.mockResolvedValue(mockDataUrl)
 
       const { result } = renderHook(() => useQRGenerator())
 
@@ -114,7 +113,7 @@ describe('useQRGenerator', () => {
         expect(result.current.error).toBeNull()
       })
 
-      expect(QRCode.toDataURL).toHaveBeenCalledWith(
+      expect(mockToDataURL).toHaveBeenCalledWith(
         'https://example.com',
         expect.any(Object),
       )
@@ -124,8 +123,7 @@ describe('useQRGenerator', () => {
   describe('QR 코드 생성', () => {
     it('PNG 포맷으로 QR 코드를 생성해야 함', async () => {
       const mockDataUrl = 'data:image/png;base64,mockdata'
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toDataURL).mockResolvedValue(mockDataUrl)
+      mockToDataURL.mockResolvedValue(mockDataUrl)
 
       const { result } = renderHook(() => useQRGenerator())
 
@@ -140,13 +138,12 @@ describe('useQRGenerator', () => {
         expect(result.current.qrDataUrl).toBe(mockDataUrl)
       })
 
-      expect(QRCode.toDataURL).toHaveBeenCalled()
+      expect(mockToDataURL).toHaveBeenCalled()
     })
 
     it('SVG 포맷으로 QR 코드를 생성해야 함', async () => {
       const mockSvg = '<svg>mock</svg>'
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toString).mockResolvedValue(mockSvg)
+      mockToString.mockResolvedValue(mockSvg)
 
       const { result } = renderHook(() => useQRGenerator())
 
@@ -161,7 +158,7 @@ describe('useQRGenerator', () => {
         expect(result.current.qrDataUrl).toBe(mockSvg)
       })
 
-      expect(QRCode.toString).toHaveBeenCalledWith(
+      expect(mockToString).toHaveBeenCalledWith(
         'https://example.com',
         expect.objectContaining({
           type: 'svg',
@@ -171,8 +168,7 @@ describe('useQRGenerator', () => {
 
     it('커스텀 색상을 적용해야 함', async () => {
       const mockDataUrl = 'data:image/png;base64,mockdata'
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toDataURL).mockResolvedValue(mockDataUrl)
+      mockToDataURL.mockResolvedValue(mockDataUrl)
 
       const { result } = renderHook(() => useQRGenerator())
 
@@ -187,7 +183,7 @@ describe('useQRGenerator', () => {
         expect(result.current.qrDataUrl).toBe(mockDataUrl)
       })
 
-      expect(QRCode.toDataURL).toHaveBeenCalledWith(
+      expect(mockToDataURL).toHaveBeenCalledWith(
         'https://example.com',
         expect.objectContaining({
           color: {
@@ -204,8 +200,7 @@ describe('useQRGenerator', () => {
       const promise = new Promise<string>((resolve) => {
         resolvePromise = resolve
       })
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toDataURL).mockReturnValue(promise)
+      mockToDataURL.mockReturnValue(promise)
 
       const { result } = renderHook(() => useQRGenerator())
 
@@ -230,7 +225,7 @@ describe('useQRGenerator', () => {
 
     it('QR 코드 생성 실패 시 에러를 반환해야 함', async () => {
       const errorMessage = 'QR 생성 실패'
-      vi.mocked(QRCode.toDataURL).mockRejectedValue(new Error(errorMessage))
+      mockToDataURL.mockRejectedValue(new Error(errorMessage))
 
       const { result } = renderHook(() => useQRGenerator())
 
@@ -250,8 +245,7 @@ describe('useQRGenerator', () => {
       const { result } = renderHook(() => useQRGenerator())
 
       // QR 코드 생성
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toDataURL).mockResolvedValue(mockDataUrl)
+      mockToDataURL.mockResolvedValue(mockDataUrl)
 
       await result.current.generateQR({ data: 'https://example.com', inputType: 'url' })
 
@@ -285,8 +279,7 @@ describe('useQRGenerator', () => {
   describe('reset 기능', () => {
     it('상태를 초기화해야 함', async () => {
       const mockDataUrl = 'data:image/png;base64,mockdata'
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toDataURL).mockResolvedValue(mockDataUrl)
+      mockToDataURL.mockResolvedValue(mockDataUrl)
 
       const { result } = renderHook(() => useQRGenerator())
 
@@ -319,9 +312,10 @@ describe('useQRGenerator', () => {
       readAsDataURL = vi.fn(() => {
         this.result = MOCK_LOGO_DATA_URL
         if (this.onload) {
-          this.onload({
+          const event = {
             target: { result: this.result },
-          } as ProgressEvent<FileReader>)
+          } as ProgressEvent<FileReader>
+          this.onload.call(this as unknown as FileReader, event)
         }
       })
 
@@ -343,7 +337,6 @@ describe('useQRGenerator', () => {
 
     beforeEach(() => {
       originalFileReader = global.FileReader
-      // @ts-expect-error - 테스트용 FileReader 모킹
       global.FileReader = MockFileReader as unknown as typeof FileReader
     })
 
@@ -455,8 +448,7 @@ describe('useQRGenerator', () => {
     it('로고가 있을 때 PNG 생성 시 로고가 합성되어야 함', async () => {
       const { result } = renderHook(() => useQRGenerator())
       const mockDataUrl = 'data:image/png;base64,mockdata'
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toDataURL).mockResolvedValue(mockDataUrl)
+      mockToDataURL.mockResolvedValue(mockDataUrl)
 
       const file = new File(['logo'], 'logo.png', { type: 'image/png' })
       await result.current.uploadLogo(file)
@@ -479,8 +471,7 @@ describe('useQRGenerator', () => {
     it('로고가 있을 때 SVG 생성 시 로고가 합성되어야 함', async () => {
       const { result } = renderHook(() => useQRGenerator())
       const mockSvg = '<svg>mock</svg>'
-      // @ts-expect-error - vi.mocked 타입 이슈
-      vi.mocked(QRCode.toString).mockResolvedValue(mockSvg)
+      mockToString.mockResolvedValue(mockSvg)
 
       const file = new File(['logo'], 'logo.png', { type: 'image/png' })
       await result.current.uploadLogo(file)

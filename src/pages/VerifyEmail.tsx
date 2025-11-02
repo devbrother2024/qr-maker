@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSearchParams, Navigate, Link } from 'react-router-dom'
 import { ProtectedRoute } from '@/components/Auth/ProtectedRoute'
 import { useAuth } from '@/hooks/useAuth'
@@ -8,9 +8,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 function VerifyEmailContent() {
   const { user, resendVerificationEmail } = useAuth()
   const [searchParams] = useSearchParams()
-  const [verificationStatus, setVerificationStatus] = useState<'pending' | 'verified' | 'error'>(
-    'pending'
-  )
 
   useEffect(() => {
     const token = searchParams.get('token')
@@ -18,17 +15,12 @@ function VerifyEmailContent() {
 
     if (token && type === 'signup') {
       // Supabase가 자동으로 처리하므로, 세션이 업데이트되면 확인됨
-      if (user?.email_confirmed_at) {
-        setVerificationStatus('verified')
-      }
+      // verificationStatus는 현재 사용되지 않으므로 제거
     }
   }, [searchParams, user])
 
   const handleResend = async () => {
-    const { error } = await resendVerificationEmail()
-    if (!error) {
-      setVerificationStatus('pending')
-    }
+    await resendVerificationEmail()
   }
 
   if (!user) {

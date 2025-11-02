@@ -13,6 +13,7 @@ vi.mock('@/hooks/useDebounce', () => ({
 describe('QRGenerator', () => {
   const mockGenerateQR = vi.fn()
   const mockDownloadQR = vi.fn()
+  const mockExportQRBlob = vi.fn()
 
   beforeEach(() => {
     vi.clearAllMocks()
@@ -29,6 +30,7 @@ describe('QRGenerator', () => {
       },
       generateQR: mockGenerateQR,
       downloadQR: mockDownloadQR,
+      exportQRBlob: mockExportQRBlob,
       setForegroundColor: vi.fn(),
       setBackgroundColor: vi.fn(),
       uploadLogo: vi.fn(),
@@ -79,6 +81,7 @@ describe('QRGenerator', () => {
       setLogoScale: vi.fn(),
       generateQR: mockGenerateQR,
       downloadQR: mockDownloadQR,
+      exportQRBlob: mockExportQRBlob,
       setForegroundColor: vi.fn(),
       setBackgroundColor: vi.fn(),
       uploadLogo: vi.fn(),
@@ -108,6 +111,7 @@ describe('QRGenerator', () => {
       setLogoScale: vi.fn(),
       generateQR: mockGenerateQR,
       downloadQR: mockDownloadQR,
+      exportQRBlob: mockExportQRBlob,
       setForegroundColor: vi.fn(),
       setBackgroundColor: vi.fn(),
       uploadLogo: vi.fn(),
@@ -143,6 +147,7 @@ describe('QRGenerator', () => {
       setLogoScale: vi.fn(),
       generateQR: mockGenerateQR,
       downloadQR: mockDownloadQR,
+      exportQRBlob: mockExportQRBlob,
       setForegroundColor: vi.fn(),
       setBackgroundColor: vi.fn(),
       uploadLogo: vi.fn(),
@@ -189,6 +194,7 @@ describe('QRGenerator', () => {
       setLogoScale: vi.fn(),
       generateQR: mockGenerateQR,
       downloadQR: mockDownloadQR,
+      exportQRBlob: mockExportQRBlob,
       setForegroundColor: vi.fn(),
       setBackgroundColor: vi.fn(),
       uploadLogo: vi.fn(),
@@ -221,6 +227,7 @@ describe('QRGenerator', () => {
       setLogoScale: vi.fn(),
       generateQR: mockGenerateQR,
       downloadQR: mockDownloadQR,
+      exportQRBlob: mockExportQRBlob,
       setForegroundColor: vi.fn(),
       setBackgroundColor: vi.fn(),
       uploadLogo: vi.fn(),
@@ -258,6 +265,7 @@ describe('QRGenerator', () => {
       setLogoScale: vi.fn(),
       generateQR: mockGenerateQR,
       downloadQR: mockDownloadQR,
+      exportQRBlob: mockExportQRBlob,
       setForegroundColor: vi.fn(),
       setBackgroundColor: vi.fn(),
       uploadLogo: vi.fn(),
@@ -292,6 +300,7 @@ describe('QRGenerator', () => {
       setLogoScale: vi.fn(),
       generateQR: mockGenerateQR,
       downloadQR: mockDownloadQR,
+      exportQRBlob: mockExportQRBlob,
       setForegroundColor: vi.fn(),
       setBackgroundColor: vi.fn(),
       uploadLogo: vi.fn(),

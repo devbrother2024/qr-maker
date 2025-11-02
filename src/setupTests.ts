@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { afterEach, beforeEach } from 'vitest'
+import { afterEach } from 'vitest'
 import { cleanup } from '@testing-library/react'
 
 // ResizeObserver 모킹 (슬라이더 컴포넌트 사용 시 필요)

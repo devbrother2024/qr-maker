@@ -21,7 +21,6 @@ export function ColorPicker({
   color,
   onChange,
   onReset,
-  defaultColor,
 }: ColorPickerProps) {
   return (
     <div className="space-y-2">

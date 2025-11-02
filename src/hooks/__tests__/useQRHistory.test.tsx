@@ -3,7 +3,6 @@ import { renderHook, waitFor } from '@testing-library/react'
 import { useQRHistory } from '../useQRHistory'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '../useAuth'
-import { useToast } from '../use-toast'
 
 // 모듈 모킹
 vi.mock('@/lib/supabase', () => ({
@@ -19,18 +18,17 @@ vi.mock('../useAuth', () => ({
   useAuth: vi.fn(),
 }))
 
-vi.mock('../use-toast', () => ({
-  useToast: vi.fn(() => ({
-    toast: vi.fn(),
-  })),
-}))
 
 describe('useQRHistory', () => {
   const mockUser = {
     id: 'user-123',
     email: 'test@example.com',
     email_confirmed_at: '2024-01-01T00:00:00Z',
-  }
+    app_metadata: {},
+    user_metadata: {},
+    aud: 'authenticated',
+    created_at: '2024-01-01T00:00:00Z',
+  } as import('@/types/user').User
 
   const mockHistoryItem = {
     id: 'qr-123',
@@ -46,7 +44,6 @@ describe('useQRHistory', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
-    // @ts-expect-error - vi.mocked 타입 이슈
     vi.mocked(useAuth).mockReturnValue({
       user: mockUser,
       session: null,
@@ -68,7 +65,6 @@ describe('useQRHistory', () => {
         error: null,
       })
 
-      // @ts-expect-error - vi.mocked 타입 이슈
       vi.mocked(supabase.from).mockReturnValue({
         select: mockSelect,
         eq: mockEq,
@@ -93,7 +89,6 @@ describe('useQRHistory', () => {
         error: { message: '데이터베이스 오류' },
       })
 
-      // @ts-expect-error - vi.mocked 타입 이슈
       vi.mocked(supabase.from).mockReturnValue({
         select: mockSelect,
         eq: mockEq,
@@ -110,7 +105,6 @@ describe('useQRHistory', () => {
     })
 
     it('사용자가 없으면 빈 목록을 반환해야 함', () => {
-      // @ts-expect-error - vi.mocked 타입 이슈
       vi.mocked(useAuth).mockReturnValue({
         user: null,
         session: null,
@@ -149,10 +143,8 @@ describe('useQRHistory', () => {
         createSignedUrl: vi.fn(),
       }
 
-      // @ts-expect-error - vi.mocked 타입 이슈
       vi.mocked(supabase.storage.from).mockReturnValue(mockStorageBucket as any)
 
-      // @ts-expect-error - vi.mocked 타입 이슈
       vi.mocked(supabase.from).mockReturnValue({
         insert: mockInsert,
         select: mockSelect,
@@ -178,7 +170,6 @@ describe('useQRHistory', () => {
     })
 
     it('로그인하지 않은 사용자는 저장할 수 없어야 함', async () => {
-      // @ts-expect-error - vi.mocked 타입 이슈
       vi.mocked(useAuth).mockReturnValue({
         user: null,
         session: null,
@@ -215,17 +206,14 @@ describe('useQRHistory', () => {
         error: null,
       })
       const mockDelete = vi.fn().mockReturnThis()
-      const mockDeleteResolved = vi.fn().mockResolvedValue({ error: null })
 
       const mockStorageRemove = vi.fn().mockResolvedValue({ error: null })
       const mockStorageBucket = {
         remove: mockStorageRemove,
       }
 
-      // @ts-expect-error - vi.mocked 타입 이슈
       vi.mocked(supabase.storage.from).mockReturnValue(mockStorageBucket as any)
 
-      // @ts-expect-error - vi.mocked 타입 이슈
       vi.mocked(supabase.from).mockReturnValue({
         select: mockSelect,
         eq: mockEq,
@@ -248,7 +236,6 @@ describe('useQRHistory', () => {
     })
 
     it('로그인하지 않은 사용자는 삭제할 수 없어야 함', async () => {
-      // @ts-expect-error - vi.mocked 타입 이슈
       vi.mocked(useAuth).mockReturnValue({
         user: null,
         session: null,

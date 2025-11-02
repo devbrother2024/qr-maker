@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useQRHistory } from '@/hooks/useQRHistory'
 import { QRHistoryItemComponent } from './QRHistoryItem'
-import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
 import type { QRHistoryItem } from '@/types/history'
 
