@@ -25,6 +25,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast()
 
   useEffect(() => {
+    let isInitialSession = true
+
     // 초기 세션 확인
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
@@ -40,6 +42,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(session?.user ?? null)
       setLoading(false)
 
+      // 초기 세션이거나 TOKEN_REFRESHED 이벤트는 토스트 표시 안 함
+      if (
+        isInitialSession ||
+        _event === 'INITIAL_SESSION' ||
+        _event === 'TOKEN_REFRESHED'
+      ) {
+        isInitialSession = false
+        return
+      }
+
       if (_event === 'SIGNED_IN') {
         toast({
           title: '로그인 성공',
@@ -51,6 +63,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           description: '안전하게 로그아웃되었습니다.',
         })
       }
+
+      isInitialSession = false
     })
 
     return () => subscription.unsubscribe()
