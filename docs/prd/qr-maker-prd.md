@@ -176,10 +176,20 @@ QR Maker는 비회원도 즉시 QR 코드를 생성할 수 있도록 진입 장�
     - [x] Popover 기반 색상 선택 UI 개선
     - [x] 2열 레이아웃 (커스터마이징 패널 좌측, 미리보기 우측) 구현
 
-- [ ] **Epic 4: QR 코드 히스토리 저장 및 관리**
+- [x] **Epic 4: QR 코드 히스토리 저장 및 관리**
   - **우선순위**: 4
   - **목표**: 로그인한 사용자가 생성한 QR 코드를 저장하고, 이를 조회/다운로드/삭제할 수 있는 히스토리 관리 기능을 제공한다.
   - **예상 스토리 수**: 10-12개
+  - **세부 체크리스트**
+    - [x] 데이터베이스 마이그레이션 (qr_history 테이블, RLS 정책, 인덱스)
+    - [x] Supabase Storage 버킷 생성 및 RLS 정책 설정
+    - [x] QR 저장 기능 (Canvas → Blob → Storage 업로드 → DB 메타데이터 저장)
+    - [x] 로고 Storage 업로드 기능
+    - [x] 히스토리 UI 컴포넌트 구현 (QRHistory, QRHistoryItem, QRHistoryActions)
+    - [x] CRUD 기능 (useQRHistory - Storage 파일 관리 포함)
+    - [x] 저장 버튼 추가 및 QRGenerator 통합
+    - [x] 마이페이지 히스토리 통합
+    - [x] 저장 완료 후 마이페이지 자동 이동 기능
 
 ---
 
