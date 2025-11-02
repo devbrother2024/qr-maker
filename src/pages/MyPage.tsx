@@ -1,5 +1,6 @@
 import { ProtectedRoute } from '@/components/Auth/ProtectedRoute'
 import { useAuth } from '@/hooks/useAuth'
+import { QRHistory } from '@/components/History/QRHistory'
 
 function MyPageContent() {
   const { user } = useAuth()
@@ -24,7 +25,7 @@ function MyPageContent() {
         </div>
         <div className="mt-8 rounded-lg border bg-card p-6">
           <h2 className="mb-4 text-xl font-semibold">QR 히스토리</h2>
-          <p className="text-muted-foreground">QR 히스토리 기능은 곧 추가될 예정입니다.</p>
+          <QRHistory />
         </div>
       </div>
     </div>

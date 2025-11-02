@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "supabase": {
+      "url": "YOUR_SUPABASE_URL"
+    }
+  }
+}

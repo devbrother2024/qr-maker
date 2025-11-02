@@ -236,6 +236,46 @@ export function useQRGenerator() {
     [state.qrDataUrl],
   )
 
+  // QR 코드를 Blob으로 변환 (저장용)
+  const exportQRBlob = useCallback(
+    async (format: QRFormat = 'png'): Promise<{ qrBlob: Blob; logoBlob: Blob | null } | null> => {
+      if (!state.qrDataUrl) {
+        return null
+      }
+
+      try {
+        let qrBlob: Blob
+
+        if (format === 'svg') {
+          // SVG는 data URL이 SVG 문자열이므로 blob으로 변환
+          qrBlob = new Blob([state.qrDataUrl], {
+            type: 'image/svg+xml',
+          })
+        } else {
+          // PNG는 data URL을 Blob으로 변환
+          const response = await fetch(state.qrDataUrl)
+          qrBlob = await response.blob()
+        }
+
+        // 로고가 있으면 Blob으로 변환
+        let logoBlob: Blob | null = null
+        if (customization.logoFile) {
+          logoBlob = customization.logoFile
+        } else if (customization.logoDataUrl) {
+          // 로고 Data URL을 Blob으로 변환
+          const response = await fetch(customization.logoDataUrl)
+          logoBlob = await response.blob()
+        }
+
+        return { qrBlob, logoBlob }
+      } catch (error) {
+        console.error('QR Blob 변환 실패:', error)
+        return null
+      }
+    },
+    [state.qrDataUrl, customization.logoFile, customization.logoDataUrl],
+  )
+
   const setForegroundColor = useCallback((color: string) => {
     setCustomization((prev) => ({ ...prev, foregroundColor: color }))
   }, [])
@@ -307,6 +347,7 @@ export function useQRGenerator() {
     customization,
     generateQR,
     downloadQR,
+    exportQRBlob,
     setForegroundColor,
     setBackgroundColor,
     uploadLogo,

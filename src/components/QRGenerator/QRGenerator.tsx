@@ -4,6 +4,7 @@ import { useDebounce } from '@/hooks/useDebounce'
 import { QRInput } from './QRInput'
 import { QRPreview } from './QRPreview'
 import { DownloadButton } from './DownloadButton'
+import { SaveButton } from './SaveButton'
 import { CustomizationPanel } from '@/components/Customization/CustomizationPanel'
 import type { QRFormat, QRInputType } from '@/types/qr'
 
@@ -23,6 +24,7 @@ export function QRGenerator() {
     customization,
     generateQR,
     downloadQR,
+    exportQRBlob,
     setForegroundColor,
     setBackgroundColor,
     uploadLogo,
@@ -112,10 +114,20 @@ export function QRGenerator() {
             isLoading={isLoading}
             error={error}
           />
-          <DownloadButton
-            onDownload={handleDownload}
-            disabled={!qrDataUrl || isLoading}
-          />
+          <div className="space-y-2">
+            <DownloadButton
+              onDownload={handleDownload}
+              disabled={!qrDataUrl || isLoading}
+            />
+            <SaveButton
+              inputValue={inputValue}
+              inputType={inputType}
+              debouncedInput={debouncedInput}
+              qrDataUrl={qrDataUrl}
+              customization={customization}
+              exportQRBlob={exportQRBlob}
+            />
+          </div>
         </div>
       </div>
     </div>

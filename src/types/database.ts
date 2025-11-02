@@ -11,38 +11,39 @@ export interface Database {
     Tables: {
       qr_history: {
         Row: {
-          id: string
-          user_id: string
-          url: string
-          foreground_color: string
           background_color: string
+          created_at: string
+          foreground_color: string
+          id: string
           logo_storage_path: string | null
           qr_image_storage_path: string
-          created_at: string
           updated_at: string
+          url: string
+          user_id: string
         }
         Insert: {
-          id?: string
-          user_id: string
-          url: string
-          foreground_color?: string
           background_color?: string
+          created_at?: string
+          foreground_color?: string
+          id?: string
           logo_storage_path?: string | null
           qr_image_storage_path: string
-          created_at?: string
           updated_at?: string
+          url: string
+          user_id: string
         }
         Update: {
-          id?: string
-          user_id?: string
-          url?: string
-          foreground_color?: string
           background_color?: string
+          created_at?: string
+          foreground_color?: string
+          id?: string
           logo_storage_path?: string | null
           qr_image_storage_path?: string
-          created_at?: string
           updated_at?: string
+          url?: string
+          user_id?: string
         }
+        Relationships: []
       }
     }
     Views: {
@@ -54,6 +55,8 @@ export interface Database {
     Enums: {
       [_ in never]: never
     }
+    CompositeTypes: {
+      [_ in never]: never
+    }
   }
 }
-
