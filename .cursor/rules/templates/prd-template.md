@@ -4,9 +4,9 @@
 
 ### 목표
 
--   {{goal_1}}
--   {{goal_2}}
--   {{goal_3}}
+- {{goal_1}}
+- {{goal_2}}
+- {{goal_3}}
 
 ### 배경 컨텍스트
 
@@ -20,21 +20,21 @@
 
 #### {{feature_group_1}}
 
--   **FR001**: {{functional_requirement_1}}
--   **FR002**: {{functional_requirement_2}}
--   **FR003**: {{functional_requirement_3}}
+- **FR001**: {{functional_requirement_1}}
+- **FR002**: {{functional_requirement_2}}
+- **FR003**: {{functional_requirement_3}}
 
 #### {{feature_group_2}}
 
--   **FR004**: {{functional_requirement_4}}
--   **FR005**: {{functional_requirement_5}}
--   **FR006**: {{functional_requirement_6}}
+- **FR004**: {{functional_requirement_4}}
+- **FR005**: {{functional_requirement_5}}
+- **FR006**: {{functional_requirement_6}}
 
 ### 비기능 요구사항 (Non-Functional Requirements)
 
--   **NFR001**: {{non_functional_requirement_1}}
--   **NFR002**: {{non_functional_requirement_2}}
--   **NFR003**: {{non_functional_requirement_3}}
+- **NFR001**: {{non_functional_requirement_1}}
+- **NFR002**: {{non_functional_requirement_2}}
+- **NFR003**: {{non_functional_requirement_3}}
 
 ---
 
@@ -62,25 +62,25 @@
 
 ### 핵심 원칙
 
--   **{{principle_1_name}}**: {{principle_1_description}}
--   **{{principle_2_name}}**: {{principle_2_description}}
--   **{{principle_3_name}}**: {{principle_3_description}}
--   **{{principle_4_name}}**: {{principle_4_description}}
+- **{{principle_1_name}}**: {{principle_1_description}}
+- **{{principle_2_name}}**: {{principle_2_description}}
+- **{{principle_3_name}}**: {{principle_3_description}}
+- **{{principle_4_name}}**: {{principle_4_description}}
 
 ### 플랫폼 및 화면
 
--   **플랫폼**: {{target_platform}}
--   **핵심 화면**:
-    -   {{screen_1}}
-    -   {{screen_2}}
-    -   {{screen_3}}
-    -   {{screen_4}}
+- **플랫폼**: {{target_platform}}
+- **핵심 화면**:
+  - {{screen_1}}
+  - {{screen_2}}
+  - {{screen_3}}
+  - {{screen_4}}
 
 ### 디자인 제약사항
 
--   {{design_constraint_1}}
--   {{design_constraint_2}}
--   {{design_constraint_3}}
+- {{design_constraint_1}}
+- {{design_constraint_2}}
+- {{design_constraint_3}}
 
 ---
 
@@ -89,27 +89,25 @@
 ### 주요 UI 요소
 
 1. **{{ui_component_1}}**
-
-    - {{ui_component_1_detail_1}}
-    - {{ui_component_1_detail_2}}
-    - {{ui_component_1_detail_3}}
+   - {{ui_component_1_detail_1}}
+   - {{ui_component_1_detail_2}}
+   - {{ui_component_1_detail_3}}
 
 2. **{{ui_component_2}}**
-
-    - {{ui_component_2_detail_1}}
-    - {{ui_component_2_detail_2}}
-    - {{ui_component_2_detail_3}}
+   - {{ui_component_2_detail_1}}
+   - {{ui_component_2_detail_2}}
+   - {{ui_component_2_detail_3}}
 
 3. **{{ui_component_3}}**
-    - {{ui_component_3_detail_1}}
-    - {{ui_component_3_detail_2}}
+   - {{ui_component_3_detail_1}}
+   - {{ui_component_3_detail_2}}
 
 ### 인터랙션 패턴
 
--   {{interaction_pattern_1}}
--   {{interaction_pattern_2}}
--   {{interaction_pattern_3}}
--   {{interaction_pattern_4}}
+- {{interaction_pattern_1}}
+- {{interaction_pattern_2}}
+- {{interaction_pattern_3}}
+- {{interaction_pattern_4}}
 
 ---
 
@@ -139,18 +137,18 @@
 
 ### 현재 버전에서 제외되는 기능
 
--   **{{out_of_scope_1}}**: {{out_of_scope_1_reason}}
--   **{{out_of_scope_2}}**: {{out_of_scope_2_reason}}
--   **{{out_of_scope_3}}**: {{out_of_scope_3_reason}}
--   **{{out_of_scope_4}}**: {{out_of_scope_4_reason}}
+- **{{out_of_scope_1}}**: {{out_of_scope_1_reason}}
+- **{{out_of_scope_2}}**: {{out_of_scope_2_reason}}
+- **{{out_of_scope_3}}**: {{out_of_scope_3_reason}}
+- **{{out_of_scope_4}}**: {{out_of_scope_4_reason}}
 
 ### 지원하지 않는 플랫폼
 
--   {{unsupported_platform_1}}
--   {{unsupported_platform_2}}
--   {{unsupported_platform_3}}
+- {{unsupported_platform_1}}
+- {{unsupported_platform_2}}
+- {{unsupported_platform_3}}
 
 ### 기술적 제약
 
--   {{technical_constraint_1}}
--   {{technical_constraint_2}}
+- {{technical_constraint_1}}
+- {{technical_constraint_2}}

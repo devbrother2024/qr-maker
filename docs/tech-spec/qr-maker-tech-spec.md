@@ -87,28 +87,28 @@ QR Maker는 **Jamstack 아키텍처**를 채택하여 정적 프론트엔드와 
 
 **1. 클라이언트 사이드 QR 생성**
 
--   QR 코드 생성은 브라우저에서 JavaScript 라이브러리(`qrcode`)를 사용하여 처리
--   서버 부하를 줄이고 즉각적인 응답 제공
--   생성된 QR 코드는 Base64 또는 Blob 형태로 다운로드
+- QR 코드 생성은 브라우저에서 JavaScript 라이브러리(`qrcode`)를 사용하여 처리
+- 서버 부하를 줄이고 즉각적인 응답 제공
+- 생성된 QR 코드는 Base64 또는 Blob 형태로 다운로드
 
 **2. Supabase 인증 시스템**
 
--   Supabase의 내장 인증(Auth) 기능 활용
--   이메일/비밀번호 인증 및 이메일 확인 자동 처리
--   Row Level Security(RLS)로 사용자별 데이터 격리
+- Supabase의 내장 인증(Auth) 기능 활용
+- 이메일/비밀번호 인증 및 이메일 확인 자동 처리
+- Row Level Security(RLS)로 사용자별 데이터 격리
 
 **3. ShadCN UI 기반 컴포넌트 설계**
 
--   ShadCN UI로 일관되고 접근성 높은 UI 컴포넌트 구성
--   Radix UI 기반의 검증된 컴포넌트 활용
--   Tailwind CSS를 활용한 유틸리티 우선 스타일링
--   Mobile-first 반응형 디자인
+- ShadCN UI로 일관되고 접근성 높은 UI 컴포넌트 구성
+- Radix UI 기반의 검증된 컴포넌트 활용
+- Tailwind CSS를 활용한 유틸리티 우선 스타일링
+- Mobile-first 반응형 디자인
 
 **4. 최소한의 상태 관리**
 
--   React Context API로 전역 인증 상태 관리
--   각 기능별 커스텀 훅으로 로컬 상태 관리
--   복잡한 상태 관리 라이브러리(Redux 등) 불필요
+- React Context API로 전역 인증 상태 관리
+- 각 기능별 커스텀 훅으로 로컬 상태 관리
+- 복잡한 상태 관리 라이브러리(Redux 등) 불필요
 
 ### 데이터 흐름
 
@@ -268,35 +268,35 @@ CREATE POLICY "Users can delete own logos"
 
 #### QR 생성
 
--   `qrcode` 라이브러리로 클라이언트 사이드 QR 생성
--   PNG/SVG 포맷 지원
--   Canvas API를 사용하여 로고 삽입
--   로고 크기는 QR 코드의 20% 이하로 제한 (스캔 가능성 유지)
--   로고 배경에 원형 배경 추가 (가독성 향상)
+- `qrcode` 라이브러리로 클라이언트 사이드 QR 생성
+- PNG/SVG 포맷 지원
+- Canvas API를 사용하여 로고 삽입
+- 로고 크기는 QR 코드의 20% 이하로 제한 (스캔 가능성 유지)
+- 로고 배경에 원형 배경 추가 (가독성 향상)
 
 #### 인증 시스템
 
--   Supabase Auth의 `signUp`, `signInWithPassword`, `signOut` 메서드 활용
--   `onAuthStateChange` 리스너로 실시간 인증 상태 관리
--   이메일 인증 리디렉션 URL 설정 필요
--   React Context API로 전역 인증 상태 관리
+- Supabase Auth의 `signUp`, `signInWithPassword`, `signOut` 메서드 활용
+- `onAuthStateChange` 리스너로 실시간 인증 상태 관리
+- 이메일 인증 리디렉션 URL 설정 필요
+- React Context API로 전역 인증 상태 관리
 
 #### 데이터 관리
 
--   Supabase Client로 CRUD 작업
--   RLS 정책으로 자동 사용자 필터링
--   QR 이미지와 로고는 Supabase Storage에 업로드
--   DB에는 Storage 경로만 저장 (메타데이터)
--   Storage 파일 경로 형식: `{user_id}/{qr_id}.png` 또는 `{user_id}/{logo_id}.png`
--   실시간 상태 업데이트를 위한 React 상태 관리
+- Supabase Client로 CRUD 작업
+- RLS 정책으로 자동 사용자 필터링
+- QR 이미지와 로고는 Supabase Storage에 업로드
+- DB에는 Storage 경로만 저장 (메타데이터)
+- Storage 파일 경로 형식: `{user_id}/{qr_id}.png` 또는 `{user_id}/{logo_id}.png`
+- 실시간 상태 업데이트를 위한 React 상태 관리
 
 #### 파일 처리
 
--   로고 업로드: File API 사용 → Supabase Storage 업로드
--   이미지 유효성 검증 (포맷, 크기)
--   QR 저장: Canvas에서 Blob 생성 → Supabase Storage 업로드
--   QR 다운로드: Storage에서 파일 로드 또는 직접 Blob 다운로드
--   파일 삭제: DB 레코드 삭제 시 Storage 파일도 함께 삭제
+- 로고 업로드: File API 사용 → Supabase Storage 업로드
+- 이미지 유효성 검증 (포맷, 크기)
+- QR 저장: Canvas에서 Blob 생성 → Supabase Storage 업로드
+- QR 다운로드: Storage에서 파일 로드 또는 직접 Blob 다운로드
+- 파일 삭제: DB 레코드 삭제 시 Storage 파일도 함께 삭제
 
 ---
 
@@ -304,10 +304,10 @@ CREATE POLICY "Users can delete own logos"
 
 ### 사전 요구사항
 
--   Node.js (최신 LTS 버전)
--   pnpm
--   Supabase 계정
--   Netlify 계정
+- Node.js (최신 LTS 버전)
+- pnpm
+- Supabase 계정
+- Netlify 계정
 
 ### 1. 프로젝트 초기화
 
@@ -341,13 +341,13 @@ pnpm dlx shadcn-ui@latest init
 
 **초기화 옵션**:
 
--   TypeScript: yes
--   Style: Default
--   Base color: Slate
--   Global CSS: src/styles/global.css
--   CSS variables: yes
--   Import alias (components): @/components
--   Import alias (utils): @/lib/utils
+- TypeScript: yes
+- Style: Default
+- Base color: Slate
+- Global CSS: src/styles/global.css
+- CSS variables: yes
+- Import alias (components): @/components
+- Import alias (utils): @/lib/utils
 
 ### 3. 필요한 ShadCN 컴포넌트 추가
 
@@ -408,9 +408,9 @@ pnpm dev
 
 **검증 기준**:
 
--   URL 입력 후 1초 이내 QR 코드 생성
--   PNG, SVG 모두 정상 다운로드
--   모바일 환경에서 정상 작동
+- URL 입력 후 1초 이내 QR 코드 생성
+- PNG, SVG 모두 정상 다운로드
+- 모바일 환경에서 정상 작동
 
 ### Phase 2: 커스터마이징 (Epic 2)
 
@@ -424,9 +424,9 @@ pnpm dev
 
 **검증 기준**:
 
--   색상 변경 시 즉시 미리보기 반영
--   로고 삽입 후에도 QR 스캔 가능
--   로고 크기 자동 제한 (QR 코드의 20%)
+- 색상 변경 시 즉시 미리보기 반영
+- 로고 삽입 후에도 QR 스캔 가능
+- 로고 크기 자동 제한 (QR 코드의 20%)
 
 ### Phase 3: 사용자 인증 (Epic 3)
 
@@ -441,9 +441,9 @@ pnpm dev
 
 **검증 기준**:
 
--   회원가입 후 이메일 인증 메일 수신
--   이메일 링크 클릭 시 계정 활성화
--   로그인 상태 유지 (새로고침 후에도)
+- 회원가입 후 이메일 인증 메일 수신
+- 이메일 링크 클릭 시 계정 활성화
+- 로그인 상태 유지 (새로고침 후에도)
 
 ### Phase 4: QR 히스토리 관리 (Epic 4)
 
@@ -460,13 +460,13 @@ pnpm dev
 
 **검증 기준**:
 
--   로그인 사용자만 저장 가능
--   사용자는 자신의 QR만 조회 가능
--   Storage에 파일이 정상적으로 업로드됨
--   DB에 Storage 경로가 올바르게 저장됨
--   히스토리에서 이미지가 정상적으로 로드됨
--   최대 100개 제한 적용
--   삭제 시 DB와 Storage 파일 모두 삭제됨
+- 로그인 사용자만 저장 가능
+- 사용자는 자신의 QR만 조회 가능
+- Storage에 파일이 정상적으로 업로드됨
+- DB에 Storage 경로가 올바르게 저장됨
+- 히스토리에서 이미지가 정상적으로 로드됨
+- 최대 100개 제한 적용
+- 삭제 시 DB와 Storage 파일 모두 삭제됨
 
 ### Phase 5: 반응형 디자인 및 최적화
 
@@ -482,19 +482,19 @@ pnpm dev
 
 ### 단위 테스트
 
--   **도구**: Vitest + React Testing Library
--   **대상**: QR 생성 로직, 커스텀 훅, 유틸 함수
--   **목표 커버리지**: 유틸 함수 80%, 커스텀 훅 70%, 컴포넌트 60%
+- **도구**: Vitest + React Testing Library
+- **대상**: QR 생성 로직, 커스텀 훅, 유틸 함수
+- **목표 커버리지**: 유틸 함수 80%, 커스텀 훅 70%, 컴포넌트 60%
 
 ### 통합 테스트
 
--   **대상**: QR 생성 플로우, 인증 플로우, 히스토리 관리 플로우
--   **방법**: React Testing Library로 사용자 인터랙션 시뮬레이션
+- **대상**: QR 생성 플로우, 인증 플로우, 히스토리 관리 플로우
+- **방법**: React Testing Library로 사용자 인터랙션 시뮬레이션
 
 ### E2E 테스트 (선택사항)
 
--   **도구**: Playwright
--   **시나리오**: 비회원 QR 생성, 회원가입/로그인, QR 저장 및 관리
+- **도구**: Playwright
+- **시나리오**: 비회원 QR 생성, 회원가입/로그인, QR 저장 및 관리
 
 ---
 
@@ -510,24 +510,24 @@ pnpm dev
 
 **CI/CD**:
 
--   main 브랜치 푸시 시 자동 빌드 및 배포
--   PR별 프리뷰 URL 생성
--   이전 버전으로 즉시 롤백 가능
+- main 브랜치 푸시 시 자동 빌드 및 배포
+- PR별 프리뷰 URL 생성
+- 이전 버전으로 즉시 롤백 가능
 
 ### 도메인 및 HTTPS
 
--   커스텀 도메인 연결
--   Let's Encrypt 자동 SSL 인증서 발급
+- 커스텀 도메인 연결
+- Let's Encrypt 자동 SSL 인증서 발급
 
 ### 모니터링
 
--   Netlify Analytics: 페이지뷰, 대역폭
--   Supabase Dashboard: DB 쿼리 성능, 인증 통계
+- Netlify Analytics: 페이지뷰, 대역폭
+- Supabase Dashboard: DB 쿼리 성능, 인증 통계
 
 ### 보안
 
--   HTTPS 강제 적용
--   환경 변수 안전 관리
--   Supabase RLS 정책 적용
--   파일 업로드 크기 제한 (5MB)
--   이미지 포맷 검증
+- HTTPS 강제 적용
+- 환경 변수 안전 관리
+- Supabase RLS 정책 적용
+- 파일 업로드 크기 제한 (5MB)
+- 이미지 포맷 검증
